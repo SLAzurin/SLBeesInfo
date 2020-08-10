@@ -1,0 +1,8 @@
+name: BeesInfo
+main: io.github.slazurin.slbeesinfo.SLBeesInfo
+version: 0.0.1
+author: Azurin
+description: Bees info plugin
+api-version: 1.16
+depend: 
+  - NBTAPI
