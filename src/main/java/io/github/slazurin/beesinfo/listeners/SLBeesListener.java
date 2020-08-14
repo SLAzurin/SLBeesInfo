@@ -1,10 +1,6 @@
 package io.github.slazurin.beesinfo.listeners;
 
-import de.tr7zw.nbtapi.NBTCompound;
-import de.tr7zw.nbtapi.NBTItem;
-import de.tr7zw.nbtapi.NBTTileEntity;
 import io.github.slazurin.slbeesinfo.SLBeesInfo;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -33,13 +29,16 @@ public class SLBeesListener implements Listener {
                     int count = this.plugin.getApi().getBeesCount(event.getClickedBlock());
                     if (count >= 0) {
                         event.getPlayer().sendMessage(this.plugin.getApi().pushChatColor() + "Bees inside: " + count);
+                        return;
                     }
                 }
             }
         }
         
         // Check if right clicking air with either bee nest/hive
-        if (event.getAction() == Action.RIGHT_CLICK_AIR && holdingItem.getType() == Material.BEE_NEST || holdingItem.getType() == Material.BEEHIVE) {
+        // Right click not working for now on Spigot 1.16.2, using other alternatives
+//        if (event.getAction() == Action.RIGHT_CLICK_AIR && (holdingItem.getType() == Material.BEE_NEST || holdingItem.getType() == Material.BEEHIVE)) {
+        if ((event.getAction() == Action.LEFT_CLICK_BLOCK) && (holdingItem.getType() == Material.BEE_NEST || holdingItem.getType() == Material.BEEHIVE)) {
             int count = this.plugin.getApi().getBeesCount(holdingItem);
             if (count >= 0) {
                 event.getPlayer().sendMessage(this.plugin.getApi().pushChatColor() + "Bees inside: " + count);
