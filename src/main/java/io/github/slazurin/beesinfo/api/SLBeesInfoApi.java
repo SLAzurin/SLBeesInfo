@@ -52,14 +52,15 @@ public class SLBeesInfoApi {
             return -1;
         }
         
-        if (item.getType() == Material.BEE_NEST || item.getType() == Material.BEEHIVE) {
+        if (!(item.getType() == Material.BEE_NEST || item.getType() == Material.BEEHIVE)) {
             return -1;
         }
         
         NBTCompound c = new NBTItem(item).getCompound("BlockEntityTag");
         
+        // No nbt tags, basically no bees inside
         if (c == null) {
-            return -1;
+            return 0;
         }
         
         NBTCompoundList l = c.getCompoundList("Bees");
@@ -67,7 +68,6 @@ public class SLBeesInfoApi {
         if (l == null) {
             return -1;
         }
-        
         return l.size();
     }
 }
