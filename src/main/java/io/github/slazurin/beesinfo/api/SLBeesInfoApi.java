@@ -5,33 +5,50 @@ import de.tr7zw.nbtapi.NBTCompoundList;
 import de.tr7zw.nbtapi.NBTItem;
 import de.tr7zw.nbtapi.NBTTileEntity;
 import io.github.slazurin.slbeesinfo.SLBeesInfo;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class SLBeesInfoApi {
     private final SLBeesInfo plugin;
     private final ChatColor[] colors;
-    private int index;
+    private final Map<UUID, Integer> playerIndices;
     
     public SLBeesInfoApi(SLBeesInfo plugin) {
         this.plugin = plugin;
-        this.index = 0;
+        this.playerIndices = new HashMap<>();
         this.colors = new ChatColor[]{
             ChatColor.GOLD,
             ChatColor.WHITE,
         };
     }
 
-    public ChatColor pushChatColor() {
-        ChatColor c = this.colors[this.index];
-        this.index++;
-        
-        if (this.index == this.colors.length) {
-            this.index = 0;
+    public ChatColor pushChatColor(UUID uid) {
+        if (!this.playerIndices.containsKey(uid)) {
+            this.playerIndices.put(uid, 0);
         }
+        int index = this.playerIndices.get(uid);
+        ChatColor c = this.colors[index];
+        index+=1;
+        if (index == this.colors.length) {
+            index = 0;
+        }
+        this.playerIndices.replace(uid, index);
+
         return c;
+    }
+    
+    public void removeUid(UUID uid) {
+        if (this.playerIndices.containsKey(uid)) {
+            this.playerIndices.remove(uid);
+        }
     }
     
     public int getBeesCount(Block b) {
