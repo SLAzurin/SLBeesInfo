@@ -8,14 +8,11 @@ import io.github.slazurin.slbeesinfo.SLBeesInfo;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class SLBeesInfoApi {
     private final SLBeesInfo plugin;
     private final ChatColor[] colors;
