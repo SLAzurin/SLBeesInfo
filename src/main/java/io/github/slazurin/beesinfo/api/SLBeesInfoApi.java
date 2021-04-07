@@ -4,7 +4,6 @@ import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTCompoundList;
 import de.tr7zw.nbtapi.NBTItem;
 import de.tr7zw.nbtapi.NBTTileEntity;
-import io.github.slazurin.slbeesinfo.SLBeesInfo;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -14,12 +13,10 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 public class SLBeesInfoApi {
-    private final SLBeesInfo plugin;
     private final ChatColor[] colors;
     private final Map<UUID, Integer> playerIndices;
     
-    public SLBeesInfoApi(SLBeesInfo plugin) {
-        this.plugin = plugin;
+    public SLBeesInfoApi() {
         this.playerIndices = new HashMap<>();
         this.colors = new ChatColor[]{
             ChatColor.GOLD,

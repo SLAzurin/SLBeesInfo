@@ -13,8 +13,9 @@ public class SLBeesInfo extends JavaPlugin {
     
     @Override
     public void onEnable() {
-        this.api = new SLBeesInfoApi(this);
+        this.api = new SLBeesInfoApi();
         this.registerExecuters();
+        this.getLogger().info("Plugin enabled.");
     }
     
     private void registerExecuters() {
